@@ -3,16 +3,19 @@ package part1;
 public class QuickUnionUF {
 	
 	private int[] id;
+	private int[] sz; // for weighted operations
 	
 	public QuickUnionUF(int N) {
 		id = new int[N];
 		for (int i = 0; i < N; i++) {
 			id[i] = i;
+			sz[i] = 1;
 		}
 	}
 	
 	private int root(int i) {
 		while (i != id[i])
+			id[i] = id[id[i]]; // helps to "flatten" the tree (path compression)
 			i = id[i];
 		return i;
 	}
@@ -21,10 +24,26 @@ public class QuickUnionUF {
 		return root(p) == root(q);
 	}
 	
+	// weighted
 	public void union(int p, int q) {
 		int i = root(p);
 		int j = root(q);
-		id[i] = j;
+		if (i == j)
+			return;
+		if (sz[i] == sz[j]) {
+			id[i] = j;
+			sz[j] += sz[i];
+		} else {
+			id[j] = i;
+			sz[i] += sz[j];
+		}
 	}
+	
+	// non-weighted
+//	public void union(int p, int q) {
+//		int i = root(p);
+//		int j = root(q);
+//		id[i] = j;
+//	}
 
 }
