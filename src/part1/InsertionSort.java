@@ -10,6 +10,14 @@ public class InsertionSort {
 				else
 					break;
 	}
+	
+	public static void sort(Comparable[] a, int lo, int hi) {
+		Comparable[] partialCopy = new Comparable[hi - lo];
+		for (int i = 0; i < partialCopy.length; i++) {
+			partialCopy[i] = a[i+lo];
+		}
+		sort(partialCopy);
+	}
 
 	private static boolean less(Comparable v, Comparable w) {
 		return v.compareTo(w) < 0;

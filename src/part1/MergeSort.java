@@ -66,13 +66,10 @@ public class MergeSort {
 	// this version of sort() cuts off at CUTOFF items
 	private static void sort2(Comparable[] a, Comparable[] aux, int lo, int hi) {
 		if (hi <= lo + CUTOFF - 1) {
-			Comparable[] partialCopy = new Comparable[hi - lo];
-			for (int i = 0; i < partialCopy.length; i++) {
-				partialCopy[i] = a[i];
-			}
-			InsertionSort.sort(partialCopy);
+			InsertionSort.sort(a, lo, hi);
 			return;
 		}
+		
 		int mid = lo + (hi - lo) / 2;
 		sort(a, aux, lo, mid);
 		sort(a, aux, mid + 1, hi);
