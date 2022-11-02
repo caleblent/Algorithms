@@ -10,7 +10,7 @@ public class BinarySearch {
 			if (key < a[mid]) {
 				high = mid - 1;
 			} else if (key > a[mid]) {
-				low = mid - 1;
+				low = mid + 1;
 			} else
 				return mid;
 		}
